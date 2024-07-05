@@ -1,0 +1,52 @@
+.img_header{
+    
+   
+    height: 60px;
+    border-radius: 100%;
+}
+.header{
+    padding: 10px;
+    background-color: rgb(2, 31, 47);   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+a{
+    text-decoration: none;
+    color: aquamarine;
+}
+.lista_header{
+   
+    width: 10%;
+    
+}
+
+.texto_header{
+    width: 80%;
+    text-align: center;
+    color: azure;
+}
+body{
+    background-color: black;
+}
+.item_body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: apareceImagen 9s;
+    position: fixed;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+}
+@keyframes apareceImagen{
+    0%{
+        opacity: 0;
+    }
+   
+    100%{
+        opacity: 1;
+    }
+}
