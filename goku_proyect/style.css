@@ -35,6 +35,7 @@ a{
 }
 body{
     background-color: black;
+    color: #ccc;
 }
 .item_body{
     background-repeat: no-repeat;

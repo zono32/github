@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const openLogin = document.getElementById('openLogin');
     const closeRegistro = document.getElementById('closeRegistro');
     const closeLogin = document.getElementById('closeLogin');
+    const registroForm = document.getElementById('registroForm');
+    const loginForm = document.getElementById('loginForm');
 
     // Asegurarse de que los modales estén ocultos al cargar la página
     registroModal.style.display = 'none';
@@ -43,54 +45,74 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Manejar el registro
-    const registroForm = document.getElementById('registroForm');
-    const loginForm = document.getElementById('loginForm');
-
     registroForm.addEventListener('submit', async function(event) {
         event.preventDefault();
+        console.log('Registro submit event fired');
+
         const username = document.getElementById('username').value;
         const email = document.getElementById('registroEmail').value;
         const password = document.getElementById('registroPassword').value;
 
-        const response = await fetch('http://localhost:5000/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, email, password })
-        });
+        console.log({ username, email, password });
 
-        const data = await response.json();
-        if (response.ok) {
-            alert('Usuario registrado exitosamente');
-            document.getElementById('registroModal').style.display = 'none';
-        } else {
-            alert(data.message);
+        try {
+            const response = await fetch('http://localhost:5500/api/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, email, password })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (response.ok) {
+               // alert('Usuario registrado exitosamente');
+                registroModal.style.display = 'none';
+                window.location.href = '/inicio.html';
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un problema con el registro.');
         }
     });
 
     // Manejar el login
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
+        console.log('Login submit event fired');
+
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
 
-        const response = await fetch('http://localhost:5000/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password })
-        });
+        console.log({ username, password });
 
-        const data = await response.json();
-        if (response.ok) {
-            alert('Inicio de sesión exitoso');
-            document.getElementById('loginModal').style.display = 'none';
-            // Redirigir a la página de inicio del programa
-            window.location.href = '/inicio.html';
-        } else {
-            alert(data.message);
+        try {
+            const response = await fetch('http://localhost:5500/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (response.ok) {
+                alert('Inicio de sesión exitoso');
+                loginModal.style.display = 'none';
+                // Redirigir a la página de inicio del programa
+                window.location.href = '/inicio.html';
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un problema con el inicio de sesión.');
         }
     });
 });

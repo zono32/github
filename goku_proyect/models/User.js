@@ -16,8 +16,12 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password);
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    try {
+        return await bcrypt.compare(candidatePassword, this.password);
+    } catch (error) {
+        throw new Error(error);
+    }
 };
 
 const User = mongoose.model('User', userSchema);
