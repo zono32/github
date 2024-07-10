@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                // alert('Usuario registrado exitosamente');
                 registroModal.style.display = 'none';
-                window.location.href = '/inicio.html';
+                window.location.href = '/public/inicio.html';
             } else {
                 alert(data.message);
             }
@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Hubo un problema con el registro.');
         }
+        registroModal.style.display = 'none';
         registroForm.reset();
     });
 
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //alert('Inicio de sesión exitoso');
                 loginModal.style.display = 'none';
                 // Redirigir a la página de inicio del programa
-                window.location.href = '/inicio.html';
+                window.location.href = '/public/inicio.html';
             } else {
                 alert(data.message);
             }

@@ -13,8 +13,8 @@ app.use(express.json());
 // Conexión a la base de datos
 const url = process.env.MONGO_URL || 'mongodb://localhost:27017/kinsoDB';
 mongoose.connect(url, {
-   //useNewUrlParser: true,
-   //useUnifiedTopology: true
+   useNewUrlParser: true,
+   useUnifiedTopology: true
 }).then(() => {
     console.log('Conectado a la base de datos');
 }).catch(err => {
@@ -24,6 +24,14 @@ mongoose.connect(url, {
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Middleware para Content Security Policy
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;");
+    next();
+});
+
+
 // Rutas de la API
 const userRoutes = require('./routes/users');
 app.use('/api/users', userRoutes);
@@ -31,6 +39,11 @@ app.use('/api/users', userRoutes);
 // Ruta para servir el archivo HTML principal
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta para inicio.html
+app.get('/inicio.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'inicio.html'));
 });
 
 // Iniciar servidor
