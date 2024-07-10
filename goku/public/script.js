@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Hubo un problema con el registro.');
         }
+        registroForm.reset();
     });
 
     // Manejar el login
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(data);
 
             if (response.ok) {
-                alert('Inicio de sesión exitoso');
+                //alert('Inicio de sesión exitoso');
                 loginModal.style.display = 'none';
                 // Redirigir a la página de inicio del programa
                 window.location.href = '/inicio.html';
@@ -114,5 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Hubo un problema con el inicio de sesión.');
         }
+        loginForm.reset();
     });
 });
