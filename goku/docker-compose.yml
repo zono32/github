@@ -2,20 +2,23 @@ version: '3.8'
 
 services:
   app:
-    image: zono32/goku-app:v3
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8080:5500"
     environment:
-      - MONGO_URL=mongodb://mongo:27017/kinsoDB
+      MONGO_URL: mongodb://mongo:27017/kinsoDB
     depends_on:
       - mongo
     volumes:
       - .:/usr/src/app
+
   mongo:
-    image: mongo:7.0
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - "27017:27017"
     volumes:

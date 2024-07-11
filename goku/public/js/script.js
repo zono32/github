@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                // alert('Usuario registrado exitosamente');
                 registroModal.style.display = 'none';
-                window.location.href = '/public/inicio.html';
+                window.location.href = '/inicio.html';
             } else {
                 alert(data.message);
             }
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 //alert('Inicio de sesión exitoso');
                 loginModal.style.display = 'none';
                 // Redirigir a la página de inicio del programa
-                window.location.href = '/public/inicio.html';
+                window.location.href = '/inicio.html';
             } else {
                 alert(data.message);
             }

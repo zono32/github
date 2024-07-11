@@ -42,12 +42,11 @@ app.get('/', (req, res) => {
 });
 
 // Ruta para inicio.html
-app.get('/inicio.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'inicio.html'));
-});
+
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5500;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
+    console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`);
+    
 });
