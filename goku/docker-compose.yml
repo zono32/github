@@ -1,28 +1,29 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: kinso
+      MYSQL_DATABASE: goku
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "8080:5500"
-    environment:
-      MONGO_URL: mongodb://mongo:27017/kinsoDB
     depends_on:
-      - mongo
-    volumes:
-      - .:/usr/src/app
-
-  mongo:
-    image: mongo
+      - db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-    ports:
-      - "27017:27017"
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: kinso
+      MYSQL_DATABASE: goku
     volumes:
-      - mongo-data:/data/db
+      - .:/app
 
 volumes:
-  mongo-data:
+  db_data:

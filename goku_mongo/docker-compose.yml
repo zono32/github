@@ -1,0 +1,36 @@
+version: '4.0'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:5500"
+    environment:
+      MONGO_URL: mongodb://mongo:27017/kinsoDB
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - goku_backend
+
+  mongo:
+    image: mongo:7.0.12
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./setFeatureCompatibilityVersion.js:/docker-entrypoint-initdb.d/setFeatureCompatibilityVersion.js:ro
+    networks:
+      - goku_backend
+volumes:
+  mongo-data:
+    
+networks:
+  goku_backend:
+    driver: bridge
