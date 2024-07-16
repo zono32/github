@@ -43,9 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
             loginModal.style.display = 'none';
         }
     });
-/*
+
     // Validar contraseñas
     function validarContrasena(password) {
+        /*
         const minLength = 8;
         const hasUpperCase = /[A-Z]/.test(password);
         const hasLowerCase = /[a-z]/.test(password);
@@ -66,26 +67,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (!hasSpecialChar) {
             return 'La contraseña debe tener al menos un carácter especial.';
-        }
+        }*/
 
         return '';
-    }*/
+    }
 
     // Manejar el envío del formulario de registro
     registroForm.addEventListener('submit', async function(event) {
         event.preventDefault();
-    
+        
         const username = document.getElementById('username').value;
         const email = document.getElementById('registroEmail').value;
         const password = document.getElementById('registroPassword').value;
-/*
+    
         const validationMessage = validarContrasena(password);
         if (validationMessage) {
             alert(validationMessage);
             return;
         }
- */   
+    
         try {
+            // Verificar si el usuario ya existe antes de enviar los datos de registro
+            const checkResponse = await fetch(`http://localhost:5500/api/users/check-user?username=${username}&email=${email}`);
+            const checkData = await checkResponse.json();
+    
+            if (checkResponse.ok) {
+                if (checkData.exists) {
+                    alert('El usuario o el correo electrónico ya están registrados.');
+                    return;
+                }
+            } else {
+                alert(checkData.message);
+                return;
+            }
+    
+            // Enviar los datos de registro si el usuario no existe
             const response = await fetch('http://localhost:5500/api/users/register', {
                 method: 'POST',
                 headers: {
@@ -98,8 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(data);
     
             if (response.ok) {
-                // Registro exitoso, redirigir a la página de inicio
-                window.location.href = '/inicio.html'; // Cambia '/inicio.html' por la ruta de tu página deseada
+                window.location.href = '/inicio.html';
             } else {
                 alert(data.message);
             }
@@ -109,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         registroForm.reset();
     });
-
+    
     // Manejar el envío del formulario de login
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
