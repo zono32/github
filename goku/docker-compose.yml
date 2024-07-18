@@ -1,29 +1,35 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: kinso
-      MYSQL_DATABASE: goku
-    ports:
-      - "3307:3306"
-    volumes:
-      - db_data:/var/lib/mysql
-
-  app:
+  goku-app:
     build: .
     ports:
       - "8080:5500"
     depends_on:
-      - db
+      - goku-db
     environment:
-      MYSQL_HOST: db
+      MYSQL_HOST: goku-db
       MYSQL_USER: root
       MYSQL_PASSWORD: kinso
       MYSQL_DATABASE: goku
+    networks:
+      - goku-network
+
+  goku-db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: kinso
+      MYSQL_DATABASE: goku
     volumes:
-      - .:/app
+      - ./mysql-scripts:/docker-entrypoint-initdb.d
+      - db-data:/var/lib/mysql
+    networks:
+      - goku-network
+
+networks:
+  goku-network:
 
 volumes:
-  db_data:
+  db-data:

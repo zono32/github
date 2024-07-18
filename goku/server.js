@@ -8,15 +8,15 @@ const app = express();
 
 // Configuración de CORS
 app.use(cors({
-  origin: 'http://127.0.0.1:5500',
+  // origin: 'http://127.0.0.1:5500',
+  origin: 'http://localhost:5500', // Reemplaza con el origen correcto
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Configuración manual de CSP
 app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;");
-  next();
+  res.setHeader("Content-Security-Policy", "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'self' http://localhost:5500");  next();
 });
 
 // Configuración para parsear application/json
@@ -36,8 +36,8 @@ const connection = mysql.createConnection({
   port: '3306',
 });
 
-
 /*
+
 //conexión con docker.
 const connection = mysql.createConnection({
   host: process.env.MYSQL_HOST || 'localhost',
@@ -153,6 +153,6 @@ app.post('/api/users/login', async (req, res) => {
 const PORT = process.env.PORT || 5500;
 
 // Iniciar el servidor
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
 });
