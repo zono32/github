@@ -16,7 +16,7 @@ const MiComponente = () => {
     
     return (
         <div className='mi-componente'>
-            <hr/>
+            
             <h2>Componente creado</h2>
             <h3>Datos del usuario:</h3>
             <ul>
