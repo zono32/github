@@ -19,10 +19,10 @@ TercerComponente.propTipes = {
     apellido: PropTipes.string,
     ficha: PropTipes.object
 }
-
+/*
 TercerComponente.defaultProps = {
     nombre: "Juan",
     apellido: "López"
 }
-
+*/
 export default TercerComponente

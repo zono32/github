@@ -3,6 +3,7 @@ import "./App.css";
 import MiComponente from "./MiComponente";
 import SegundoComponente from "./SegundoComponente";
 import TercerComponente from "./TercerComponente";
+import EventosComponente from "./EventosComponente";
 
 function App() {
   const ficha_medica = {
@@ -20,6 +21,8 @@ function App() {
         <p>Hola muy buenas que tal va todo?</p>
         <div className="componentes">
           {/*Cargar mi primer componente*/}
+          <EventosComponente />
+          <hr/>
           <TercerComponente
             nombre="Kinso"
             apellido="Lafuente"
