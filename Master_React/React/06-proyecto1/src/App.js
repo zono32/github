@@ -19,7 +19,7 @@ function App() {
       <nav className="nav">
         <ul>
           <li>
-            <a href="/#">Inicio</a>
+            <a href="https://www.youtube.com/watch?v=Xi7LL_p7PNY">Inicio</a>
           </li>
           <li>
             <a href="/#">Películas</a>
