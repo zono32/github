@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+
+import {Link} from 'react-router-dom';
+import ListadoTrabajos from "./ListadoTrabajos";
 
 const Portafolio = () => {
   return (
-    <div>
-      Portafolio
-    </div>
-  )
-}
+    <div className="page">
+      <h2 className="heading">Portafolio</h2>
 
-export default Portafolio
+      <ListadoTrabajos/>
+    </div>
+  );
+};
+
+export default Portafolio;
