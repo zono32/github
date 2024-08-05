@@ -50,8 +50,32 @@ code {
   }
 }
 
-input[type ='text']{
-  padding: 10px;
+input[type ='text'],
+[type = 'submit']{
+  padding: 20px;
   width: 50%;
-  font-size: 25px;
+ 
+}
+.tareas-container{
+  width: 80%;
+}
+
+input[type = 'submit']{
+  cursor: pointer;
+  padding: 22px;
+  border-radius: 5px;
+  background: green;
+  width: 15%;
+  color: white;
+  font-weight: bold ;
+  border: none;
+  margin-left: 10px;
+  opacity: 0.8;
+}
+
+
+input[type = 'submit']:hover{
+  opacity: 1;
+  
+ 
 }

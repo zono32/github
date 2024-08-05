@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-export const Empleados = ({ page = 1 }) => {
+export const Empleados = React.memo(({ page, mensaje}) => {
   const [empleados, setEmpleados] = useState([]);
 
   useEffect(() => {
-    conseguirEmpleados(page);
-  }, [page]);
+    console.log("Se ha vuelto a renderizar Empleados!!");
+  }, [empleados]);
 
   const conseguirEmpleados = async (p) => {
     const url = "https://reqres.in/api/users?page=" + p;
@@ -13,10 +13,15 @@ export const Empleados = ({ page = 1 }) => {
     const { data: empleados } = await peticion.json();
 
     setEmpleados(empleados);
-    console.log("Se completo la ejecucion ajax");
+   
   };
 
-  console.log("reender");
+  useEffect(() => {
+    conseguirEmpleados(page);
+    mensaje();
+  }, [page]);
+
+ 
 
   return (
     <div>
@@ -37,4 +42,4 @@ export const Empleados = ({ page = 1 }) => {
       </h2>
     </div>
   );
-};
+});

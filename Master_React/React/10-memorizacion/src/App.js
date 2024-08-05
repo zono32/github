@@ -1,6 +1,8 @@
 
-import { Gestion } from './components/Gestion';
+//import { Tareas } from './components/Tareas';
 import logo from './logo.svg';
+import { Gestion } from './components/Gestion';
+
 
 
 function App() {
@@ -8,8 +10,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Gestion />
-        {/*<Empleados/>*/}
+
+        {/*Ejercicio con método memo para componentes*/}
+        {<Gestion />}
+        
+        {/*Ejercicio con hook useMemo*/}
+        {/*<Tareas />*/}
+        
       </header>
     </div>
   );

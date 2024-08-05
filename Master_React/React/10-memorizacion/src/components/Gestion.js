@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Empleados } from "./Empleados";
 
 export const Gestion = () => {
     const [nombre, setNombre] = useState("gestor");
-    const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
+  
+
     useEffect(() => {
         console.log('La vista se ha reenderizado')
     })
 
     const asignarGestor = (e) => {
         setNombre(e.target.value);
-    }
+  }
+  
+  useEffect(() => {
+    console.log('Vista gestion actualizada')
+  },[nombre, page])
 
+  const mostrarMensaje = useCallback(() => {
+      console.log('Hola que tal, soy un mensaje desde el componente Empleados !!')  
+    },[page])
+  
+  
   return (
     <div>
           <h1>Nombre del gestor: {nombre}</h1>
@@ -21,7 +32,7 @@ export const Gestion = () => {
           <p>Los usuarios vienen de Jsonplaceholder son gestionados por {nombre}</p>
           <button onClick={() => { setPage(1) }}>Página 1</button>
           <button onClick={() => { setPage(2) }}>Página 2</button>
-      <Empleados page={page} />
+      <Empleados page={page} mensaje={mostrarMensaje} />
     </div>
   );
 };
